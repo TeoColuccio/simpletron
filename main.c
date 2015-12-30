@@ -13,8 +13,20 @@ int main (){
 	int memory[MEMORY_SIZE];
 	int accumulator, instructionCounter, instructionRegister, operationCode, operand;
 	
-	printf("%s",welcome());
 	azzera_memory(memory,MEMORY_SIZE);
+	printf("%s",welcome());
+
+	memory[0] = 1007; /* (Legge A) */
+	memory[1] = 1008; /* (Legge B) */
+	memory[2] = 2007; /* (Carica A nell'accumulatore) */
+	memory[3] = 3008; /* (Somma B all'accumulatore) */
+	memory[4] = 2109; /* (Memorizza il valore dell'accumulatore */
+	memory[5] = 1109; /* (Stampa C) */
+	memory[6] = 4300; /* (Halt) */
+	memory[7] = 0;    /* (Variabile A) */ 
+	memory[8] = 0;    /* (Variabile B) */
+	memory[9] = 0;	  /* (Risultato C) */
+
 	memory_dump(memory,MEMORY_SIZE);
         cpu_reset(&accumulator, &instructionCounter, &instructionRegister, &operationCode, &operand);
  	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
