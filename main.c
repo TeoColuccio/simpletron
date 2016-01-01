@@ -4,9 +4,10 @@
 
 char* welcome();
 void azzera_memory(int memory[], int size);
-void  memory_dump(int memory[], int size);
+void memory_dump(int memory[], int size);
 void cpu_reset(int *accumulator, int *instructionCounter, int *instructionRegister, int *operationCode, int *operand);
-void cpu_dump(int accumulator, int instructionCounter, int  instructionRegister, int  operationCode, int operand);
+void cpu_dump(int accumulator, int instructionCounter, int  instructionRegister,int operationCode, int operand);
+void fetch(int memory[], int size, int *instructionCounter, int *instructionRegister, int *operationCode, int *operand);
 
 int main (){
 
@@ -29,7 +30,8 @@ int main (){
 
 	memory_dump(memory,MEMORY_SIZE);
         cpu_reset(&accumulator, &instructionCounter, &instructionRegister, &operationCode, &operand);
- 	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
+ 	fetch(memory, MEMORY_SIZE, &instructionCounter, &instructionRegister, &operationCode, &operand);	
+	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
 
 	return 0;
 }
@@ -96,4 +98,12 @@ void cpu_dump(int accumulator, int instructionCounter, int  instructionRegister,
       "operationCode: %02d\n"
       "operand: %02d\n", accumulator, instructionCounter, instructionRegister, operationCode, operand);
 }  
+
+
+void fetch(int memory[], int size, int *instructionCounter, int *instructionRegister, int *operationCode, int *operand)
+{
+	for  (memory[*instructionCounter] = 0; memory[*instructionCounter] < size; *instructionCounter++) {
+		memory[*instructionCounter] = *instructionRegister;
+	}
+}
 
