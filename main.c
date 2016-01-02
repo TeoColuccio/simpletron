@@ -14,9 +14,9 @@ int main (){
 	int memory[MEMORY_SIZE];
 	int accumulator, instructionCounter, instructionRegister, operationCode, operand;
 	
+	cpu_reset(&accumulator, &instructionCounter, &instructionRegister, &operationCode, &operand);
 	azzera_memory(memory,MEMORY_SIZE);
-	printf("%s",welcome());
-
+	
 	memory[0] = 1007; /* (Legge A) */
 	memory[1] = 1008; /* (Legge B) */
 	memory[2] = 2007; /* (Carica A nell'accumulatore) */
@@ -27,11 +27,15 @@ int main (){
 	memory[7] = 0;    /* (Variabile A) */ 
 	memory[8] = 0;    /* (Variabile B) */
 	memory[9] = 0;	  /* (Risultato C) */
-
+	
+	printf("%s",welcome());
+	
+	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
 	memory_dump(memory,MEMORY_SIZE);
-        cpu_reset(&accumulator, &instructionCounter, &instructionRegister, &operationCode, &operand);
+        
  	fetch(memory, MEMORY_SIZE, instructionCounter, &instructionRegister, &operationCode, &operand);	
 	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
+	memory_dump(memory,MEMORY_SIZE);
 
 	return 0;
 }
