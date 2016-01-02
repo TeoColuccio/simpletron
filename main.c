@@ -102,10 +102,8 @@ void cpu_dump(int accumulator, int instructionCounter, int  instructionRegister,
 
 void fetch(int memory[], int size, int instructionCounter, int *instructionRegister, int *operationCode, int *operand)
 {
-	int i = 0; 
-
-	instructionCounter = i;	
-	*instructionRegister = memory[i];
+	instructionCounter = 0;
+	*instructionRegister = memory[instructionCounter];
 	*operationCode = *instructionRegister / 100;
 	*operand = *instructionRegister % 100;		
 }
