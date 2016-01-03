@@ -1,6 +1,18 @@
 #include <stdio.h>
 
 #define MEMORY_SIZE 100
+#define READ 10
+#define WRITE 11
+#define LOAD 20
+#define STORE 21
+#define ADD 30
+#define SUBTRACT 31
+#define DIVIDE 32
+#define MULTIPLY 33
+#define BRANCH 40
+#define BRANCHNEG 41
+#define BRANCHZERO 42
+#define HALT 43
 
 char* welcome();
 void azzera_memory(int memory[], int size);
@@ -114,10 +126,10 @@ void fetch(int memory[], int size, int instructionCounter, int *instructionRegis
 
 void execute(int memory[], int instructionCounter , int instructionRegister, int operationCode, int operand, int *accumulator)
 {
-	if (operationCode == 10) {
+	if (operationCode == READ) {
 		 scanf("%d", &memory[operand]);
 	}
-	else if (operationCode == 20) {
+	else if (operationCode == WRITE) {
 		printf("%d", operand);
 	} 
 }
