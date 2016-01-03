@@ -8,6 +8,7 @@ void memory_dump(int memory[], int size);
 void cpu_reset(int *accumulator, int *instructionCounter, int *instructionRegister, int *operationCode, int *operand);
 void cpu_dump(int accumulator, int instructionCounter, int  instructionRegister,int operationCode, int operand);
 void fetch(int memory[], int size, int instructionCounter, int *instructionRegister, int *operationCode, int *operand);
+void execute(int memory[], int instructionCounter , int instructionRegister, int operationCode, int operand, int *accumulator);
 
 int main (){
 
@@ -29,7 +30,7 @@ int main (){
 	memory[9] = 0;	  /* (Risultato C) */
 	
 	printf("%s",welcome());
-	
+	execute(memory, instructionCounter, instructionRegister, operationCode, operand, &accumulator);	
 	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
 	memory_dump(memory,MEMORY_SIZE);
         
@@ -104,12 +105,21 @@ void cpu_dump(int accumulator, int instructionCounter, int  instructionRegister,
       "operand: %02d\n", accumulator, instructionCounter, instructionRegister, operationCode, operand);
 }  
 
-
 void fetch(int memory[], int size, int instructionCounter, int *instructionRegister, int *operationCode, int *operand)
 {
 	*instructionRegister = memory[instructionCounter];
 	*operationCode = *instructionRegister / 100;
 	*operand = *instructionRegister % 100;		
+}
+
+void execute(int memory[], int instructionCounter , int instructionRegister, int operationCode, int operand, int *accumulator)
+{
+	if (operationCode == 10) {
+		 scanf("%d", &memory[operand]);
+	}
+	else if (operationCode == 20) {
+		printf("%d", operand);
+	} 
 }
 
 
