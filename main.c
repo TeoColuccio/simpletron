@@ -34,6 +34,7 @@ int main (){
 	memory_dump(memory,MEMORY_SIZE);
         
  	fetch(memory, MEMORY_SIZE, instructionCounter, &instructionRegister, &operationCode, &operand);	
+	instructionCounter++;
 	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
 	memory_dump(memory,MEMORY_SIZE);
 
