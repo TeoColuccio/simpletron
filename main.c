@@ -25,7 +25,7 @@ void execute(int memory[], int *instructionCounter , int instructionRegister, in
 int main (){
 
 	int memory[MEMORY_SIZE];
-	int accumulator, instructionCounter, instructionRegister, operationCode, operand;
+	int accumulator, instructionCounter, instructionRegister, operationCode, operand, i=0;
 	
 	cpu_reset(&accumulator, &instructionCounter, &instructionRegister, &operationCode, &operand);
 	azzera_memory(memory,MEMORY_SIZE);
@@ -42,14 +42,15 @@ int main (){
 	memory[9] = 0;	  /* (Risultato C) */
 	
 	printf("%s",welcome());
+     
+ 	while (memory[instructionCounter] < MEMORY_SIZE) {
+	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
+	memory_dump(memory,MEMORY_SIZE);
+
+	fetch(memory, MEMORY_SIZE, instructionCounter, &instructionRegister, &operationCode, &operand);	
 	execute(memory, &instructionCounter, instructionRegister, operationCode, operand, &accumulator);	
-	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
-	memory_dump(memory,MEMORY_SIZE);
-        
- 	fetch(memory, MEMORY_SIZE, instructionCounter, &instructionRegister, &operationCode, &operand);	
 	instructionCounter++;
-	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
-	memory_dump(memory,MEMORY_SIZE);
+	}
 
 	return 0;
 }
