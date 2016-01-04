@@ -20,7 +20,7 @@ void memory_dump(int memory[], int size);
 void cpu_reset(int *accumulator, int *instructionCounter, int *instructionRegister, int *operationCode, int *operand);
 void cpu_dump(int accumulator, int instructionCounter, int  instructionRegister,int operationCode, int operand);
 void fetch(int memory[], int size, int instructionCounter, int *instructionRegister, int *operationCode, int *operand);
-void execute(int memory[], int instructionCounter , int instructionRegister, int operationCode, int operand, int *accumulator);
+void execute(int memory[], int *instructionCounter , int instructionRegister, int operationCode, int operand, int *accumulator);
 
 int main (){
 
@@ -42,7 +42,7 @@ int main (){
 	memory[9] = 0;	  /* (Risultato C) */
 	
 	printf("%s",welcome());
-	execute(memory, instructionCounter, instructionRegister, operationCode, operand, &accumulator);	
+	execute(memory, &instructionCounter, instructionRegister, operationCode, operand, &accumulator);	
 	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
 	memory_dump(memory,MEMORY_SIZE);
         
@@ -124,14 +124,51 @@ void fetch(int memory[], int size, int instructionCounter, int *instructionRegis
 	*operand = *instructionRegister % 100;		
 }
 
-void execute(int memory[], int instructionCounter , int instructionRegister, int operationCode, int operand, int *accumulator)
+void execute(int memory[], int *instructionCounter , int instructionRegister, int operationCode, int operand, int *accumulator)
 {
-	if (operationCode == READ) {
+	switch (operationCode) {
+
+	case READ: 
 		 scanf("%d", &memory[operand]);
-	}
-	else if (operationCode == WRITE) {
+		break;
+	case WRITE: 
 		printf("%d\n", memory[operand]);
-	} 
+		break;
+	case LOAD: 
+		*accumulator = memory[operand];
+		break;
+	case STORE:
+		memory[operand] = *accumulator;
+		break;
+	case ADD: 
+		*accumulator+=memory[operand];
+		break;
+	case SUBTRACT:
+		*accumulator-=memory[operand];
+		break;
+	case DIVIDE: 
+		*accumulator/=memory[operand];
+		break;
+	case MULTIPLY:
+		*accumulator*=memory[operand];
+		break;
+	case BRANCH: 
+		*instructionCounter = memory[operand];
+		break;
+	case BRANCHNEG:
+		if (accumulator < 0) {
+		*instructionCounter = memory[operand];
+		}
+		break;
+	case BRANCHZERO:
+		if (accumulator == 0) {
+		*instructionCounter = memory[operand];
+		}
+		break;
+	case HALT:
+		break; 
+	}
 }
+
 
 
