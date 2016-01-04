@@ -130,7 +130,7 @@ void execute(int memory[], int instructionCounter , int instructionRegister, int
 		 scanf("%d", &memory[operand]);
 	}
 	else if (operationCode == WRITE) {
-		printf("%d", operand);
+		printf("%d\n", memory[operand]);
 	} 
 }
 
