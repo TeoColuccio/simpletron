@@ -166,6 +166,7 @@ void execute(int memory[], int *instructionCounter , int instructionRegister, in
 		}
 		break;
 	case HALT:
+		printf("*** Simpletron execution terminated ***\n");
 		break; 
 	}
 }
