@@ -43,14 +43,16 @@ int main (){
 	
 	printf("%s",welcome());
      
- 	while (memory[instructionCounter] < MEMORY_SIZE) {
+     	/* il ciclo termina quando arriva l'istruzione di HALT */
+ 	while (operationCode!=HALT && instructionCounter<MEMORY_SIZE) {
+		fetch(memory, MEMORY_SIZE, instructionCounter, &instructionRegister, &operationCode, &operand);	
+		instructionCounter++; /* e' importante che l'incremento avvenga PRIMA dell'execute */
+		execute(memory, &instructionCounter, instructionRegister, operationCode, operand, &accumulator);
+	}
+
+	/* un'unica stampa alla fine */
 	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
 	memory_dump(memory,MEMORY_SIZE);
-
-	fetch(memory, MEMORY_SIZE, instructionCounter, &instructionRegister, &operationCode, &operand);	
-	execute(memory, &instructionCounter, instructionRegister, operationCode, operand, &accumulator);	
-	instructionCounter++;
-	}
 
 	return 0;
 }
