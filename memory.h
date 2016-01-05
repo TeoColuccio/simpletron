@@ -1,9 +1,9 @@
 #ifndef MEMORY_H
 #define MEMORY_H
-
+#define MEMORY_SIZE 100
 struct memory {
-    memory[MEMORY_SIZE];
-}
+  int memory[MEMORY_SIZE];
+};
 
 typedef struct memory memory;
 
