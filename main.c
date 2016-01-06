@@ -1,34 +1,14 @@
 #include <stdio.h>
-
-#define MEMORY_SIZE 100
-#define READ 10
-#define WRITE 11
-#define LOAD 20
-#define STORE 21
-#define ADD 30
-#define SUBTRACT 31
-#define DIVIDE 32
-#define MULTIPLY 33
-#define BRANCH 40
-#define BRANCHNEG 41
-#define BRANCHZERO 42
-#define HALT 43
+#include "memory.h"
 
 char* welcome();
-void azzera_memory(int memory[], int size);
-void memory_dump(int memory[], int size);
-void cpu_reset(int *accumulator, int *instructionCounter, int *instructionRegister, int *operationCode, int *operand);
-void cpu_dump(int accumulator, int instructionCounter, int  instructionRegister,int operationCode, int operand);
-void fetch(int memory[], int size, int instructionCounter, int *instructionRegister, int *operationCode, int *operand);
-void execute(int memory[], int *instructionCounter , int instructionRegister, int operationCode, int operand, int *accumulator);
 
 int main (){
 
+	Memory m;
 	int memory[MEMORY_SIZE];
-	int accumulator, instructionCounter, instructionRegister, operationCode, operand, i=0;
-	
-	cpu_reset(&accumulator, &instructionCounter, &instructionRegister, &operationCode, &operand);
-	azzera_memory(memory,MEMORY_SIZE);
+
+	azzera_memory(&m, memory[]);
 	
 	memory[0] = 1007; /* (Legge A) */
 	memory[1] = 1008; /* (Legge B) */
@@ -43,16 +23,7 @@ int main (){
 	
 	printf("%s",welcome());
      
-     	/* il ciclo termina quando arriva l'istruzione di HALT */
- 	while (operationCode!=HALT && instructionCounter<MEMORY_SIZE) {
-		fetch(memory, MEMORY_SIZE, instructionCounter, &instructionRegister, &operationCode, &operand);	
-		instructionCounter++; /* e' importante che l'incremento avvenga PRIMA dell'execute */
-		execute(memory, &instructionCounter, instructionRegister, operationCode, operand, &accumulator);
-	}
-
-	/* un'unica stampa alla fine */
-	cpu_dump(accumulator, instructionCounter, instructionRegister, operationCode, operand);
-	memory_dump(memory,MEMORY_SIZE);
+	memory_dump(&m, memory[]);
 
 	return 0;
 }
@@ -67,112 +38,5 @@ char* welcome ()
          "*** Type the sentiel -99999 to stop entering ***\n"
          "*** your program. ***\n";
 }
-
-void azzera_memory(int memory[], int size)
-{
-	int i;
-
-	for (i=0; i<size; i++) {
-		memory[i] = 0;
-	}
-}
-
-void  memory_dump(int memory[], int size)
-{
-	int i=0, righe=0,colonne=0;
-	printf("Memory: \n");
-
-	putchar('\t');
-	for (colonne=0;colonne<10;colonne++){
-		printf("   %d\t ", colonne);
-
-	}
-	putchar('\n');
-
-	for (i=0; i<size; i++) {
-		if (i%10==0) {
-			printf("%2d\t", righe);
-			righe+=10;
-		}
-		printf("+%04d\t", memory[i]);
-
-		if ((i+1)%10==0) {
-			putchar('\n');
-		}
-	}
-}
-
-void cpu_reset(int *accumulator, int *instructionCounter, int *instructionRegister, int *operationCode, int *operand)
-{
-  *accumulator=0;
-  *instructionCounter=0;
-  *instructionRegister=0;
-  *operationCode=0;
-  *operand=0;
-}
-
-void cpu_dump(int accumulator, int instructionCounter, int  instructionRegister, int  operationCode, int operand)
-{
-  printf("accumulator: +%04d\n"
-      "instructionCounter: %02d\n"
-      "instructionRegister: +%04d\n"
-      "operationCode: %02d\n"
-      "operand: %02d\n", accumulator, instructionCounter, instructionRegister, operationCode, operand);
-}  
-
-void fetch(int memory[], int size, int instructionCounter, int *instructionRegister, int *operationCode, int *operand)
-{
-	*instructionRegister = memory[instructionCounter];
-	*operationCode = *instructionRegister / 100;
-	*operand = *instructionRegister % 100;		
-}
-
-void execute(int memory[], int *instructionCounter , int instructionRegister, int operationCode, int operand, int *accumulator)
-{
-	switch (operationCode) {
-
-	case READ: 
-		 scanf("%d", &memory[operand]);
-		break;
-	case WRITE: 
-		printf("%d\n", memory[operand]);
-		break;
-	case LOAD: 
-		*accumulator = memory[operand];
-		break;
-	case STORE:
-		memory[operand] = *accumulator;
-		break;
-	case ADD: 
-		*accumulator+=memory[operand];
-		break;
-	case SUBTRACT:
-		*accumulator-=memory[operand];
-		break;
-	case DIVIDE: 
-		*accumulator/=memory[operand];
-		break;
-	case MULTIPLY:
-		*accumulator*=memory[operand];
-		break;
-	case BRANCH: 
-		*instructionCounter = memory[operand];
-		break;
-	case BRANCHNEG:
-		if (accumulator < 0) {
-		*instructionCounter = memory[operand];
-		}
-		break;
-	case BRANCHZERO:
-		if (accumulator == 0) {
-		*instructionCounter = memory[operand];
-		}
-		break;
-	case HALT:
-		printf("*** Simpletron execution terminated ***\n");
-		break; 
-	}
-}
-
 
 

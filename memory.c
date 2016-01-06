@@ -1,6 +1,7 @@
+#include <stdio.h>
 #include "memory.h"
 
-void azzera_memory(int memory[], int size)
+void azzera_memory(MemoryPtr, int memory[], int size)
 {
   int i;
   
@@ -9,11 +10,11 @@ void azzera_memory(int memory[], int size)
   }
 }
 
-void memory_dump(int memory[], int size)
+void memory_dump(MemoryPtr, int memory[], int size)
 { 
- int i=0, righe=0, colonne=0;
+  int i=0, righe=0, colonne=0;
   
- printf("Memory: \n");
+  printf("Memory: \n");
 
   putchar('\t');
   for (colonne=0;colonne<10;colonne++) {
