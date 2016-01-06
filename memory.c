@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include "memory.h"
 
-void azzera_memory(MemoryPtr, int memory[], int size)
+void azzera_memory(MemoryPtr m)
 {
   int i;
   
-  for (i=0; i<size; i++) {
-      memory[i] = 0;
+  for (i=0; i<MEMORY_SIZE; i++) {
+      m->memory[i] = 0;
   }
 }
 
-void memory_dump(MemoryPtr, int memory[], int size)
+void memory_dump(MemoryPtr m)
 { 
   int i=0, righe=0, colonne=0;
   
@@ -22,12 +22,12 @@ void memory_dump(MemoryPtr, int memory[], int size)
   }
   putchar('\n');
   
-  for (i=0; i<size; i++) {
+  for (i=0; i<MEMORY_SIZE; i++) {
         if(i%10==0) {
                 printf("%2d\t",righe);
                 righe+=10;
         }
-        printf("+%04d\t", memory[i]);
+        printf("+%04d\t", m->memory[i]);
 
         if ((i+1)%10==0) {
                 putchar('\n');
