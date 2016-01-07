@@ -24,7 +24,7 @@ void execute(MemoryPtr m, int *instructionCounter , int instructionRegister, int
 int main (){
 
 	Memory m;
-	int accumulator, instructionCounter, instructionRegister, operationCode, operand, i=0;
+	int accumulator, instructionCounter, instructionRegister, operationCode, operand;
 	
 	cpu_reset(&accumulator, &instructionCounter, &instructionRegister, &operationCode, &operand);
 	azzera_memory(&m);
@@ -44,6 +44,7 @@ int main (){
      
      	/* il ciclo termina quando arriva l'istruzione di HALT */
  	while (operationCode!=HALT && instructionCounter<MEMORY_SIZE) {
+    printf("instructionCounter: %d\n", instructionCounter);
 		fetch(&m, instructionCounter, &instructionRegister, &operationCode, &operand);	
 		instructionCounter++; /* e' importante che l'incremento avvenga PRIMA dell'execute */
 		execute(&m, &instructionCounter, instructionRegister, operationCode, operand, &accumulator);
@@ -63,7 +64,7 @@ char* welcome ()
          "*** (or data word) at a time. I will type the ***\n"
          "*** location number and a question mark (?). ***\n"
          "*** You the type the word for that location. ***\n"
-         "*** Type the sentiel -99999 to stop entering ***\n"
+         "*** Type the sentinel -99999 to stop entering ***\n"
          "*** your program. ***\n";
 }
 
@@ -97,7 +98,7 @@ void execute(MemoryPtr m, int *instructionCounter , int instructionRegister, int
 	switch (operationCode) {
 
 	case READ: 
-		 scanf("%d", m->memory[operand]);
+		 scanf("%d", &(m->memory[operand]));
 		break;
 	case WRITE: 
 		printf("%d\n", m->memory[operand]);
