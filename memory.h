@@ -10,6 +10,7 @@ struct Memory {
 typedef struct Memory Memory;
 typedef struct Memory * MemoryPtr;
 
+void set_memory(MemoryPtr m, int index, int num);
 void azzera_memory(MemoryPtr m);
 void memory_dump(MemoryPtr m);
 

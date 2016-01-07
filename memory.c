@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "memory.h"
-
+void set_memory(MemoryPtr m, int index, int num)
+{
+  m->memory[index] = num;
+}
 void azzera_memory(MemoryPtr m)
 {
   int i;

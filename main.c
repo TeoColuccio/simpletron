@@ -29,16 +29,16 @@ int main (){
 	cpu_reset(&accumulator, &instructionCounter, &instructionRegister, &operationCode, &operand);
 	azzera_memory(&m);
 	
-	m.memory[0] = 1007; /* (Legge A) */
-	m.memory[1] = 1008; /* (Legge B) */
-	m.memory[2] = 2007; /* (Carica A nell'accumulatore) */
-	m.memory[3] = 3008; /* (Somma B all'accumulatore) */
-	m.memory[4] = 2109; /* (Memorizza il valore dell'accumulatore */
-	m.memory[5] = 1109; /* (Stampa C) */
-	m.memory[6] = 4300; /* (Halt) */
-	m.memory[7] = 0;    /* (Variabile A) */ 
-	m.memory[8] = 0;    /* (Variabile B) */
-	m.memory[9] = 0;	  /* (Risultato C) */
+	set_memory(&m, 0, 1007); /* (Legge A) */
+	set_memory(&m, 1, 1008); /* (Legge B) */
+	set_memory(&m, 2, 2007); /* (Carica A nell'accumulatore) */
+	set_memory(&m, 3, 3008); /* (Somma B all'accumulatore) */
+	set_memory(&m, 4, 2109); /* (Memorizza il valore dell'accumulatore */
+	set_memory(&m, 5, 1109); /* (Stampa C) */
+	set_memory(&m, 6, 4300); /* (Halt) */
+	set_memory(&m, 7, 0);    /* (Variabile A) */ 
+	set_memory(&m, 8, 0);    /* (Variabile B) */
+	set_memory(&m, 9, 0);    /* (Risultato C) */
 	
 	printf("%s",welcome());
      
