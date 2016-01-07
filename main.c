@@ -25,7 +25,7 @@ int main (){
 	
 	printf("%s",welcome());
      
-     	/* il ciclo termina quando arriva l'istruzione di HALT */
+    	/* il ciclo termina quando arriva l'istruzione di HALT */
  	while (c.operationCode!=HALT && c.instructionCounter<MEMORY_SIZE) {
     printf("instructionCounter: %d\n", c.instructionCounter);
 		fetch(&m, &c);	
@@ -33,7 +33,7 @@ int main (){
 		execute(&m, &c);
 	}
 
-	/* un'unica stampa alla fine */
+	/* un'unica stampa alla fine */ 
 	cpu_dump(&c);
 	memory_dump(&m);
 
