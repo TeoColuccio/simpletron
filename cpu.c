@@ -52,19 +52,19 @@ void execute(MemoryPtr m, CpuPtr)
       c->accumulator/=m->memory[operand];
       break;
     case MULTIPLY:
-      c->accumulator*=memory[operand];
+      c->accumulator*=m->memory[operand];
       break;
     case BRANCH: 
-      c->instructionCounter = memory[operand];
+      c->instructionCounter = m->memory[operand];
       break;
     case BRANCHNEG:
       if (accumulator < 0) {
-        c->instructionCounter = memory[operand];
+        c->instructionCounter = m->memory[operand];
       }
       break;
     case BRANCHZERO:
       if (accumulator == 0) {
-        c->instructionCounter = memory[operand];
+        c->instructionCounter = m->memory[operand];
       }
       break;
     case HALT:
