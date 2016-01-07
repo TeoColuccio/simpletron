@@ -21,50 +21,50 @@ void cpu_dump(CpuPtr c)
 
 void fetch(MemoryPtr m, CpuPtr c)
 {
-  c->instructionRegister = &(m->memory[instructionCounter]);
+  c->instructionRegister = &(m->memory[c->instructionCounter]);
   c->operationCode = c->instructionRegister / 100;
   c->operand = c->instructionRegister % 100;		
 }
 
-void execute(MemoryPtr m, CpuPtr)
+void execute(MemoryPtr m, CpuPtr c)
 {
   switch (c->operationCode) {
 
     case READ: 
-      scanf("%d", &(m->memory[operand]));
+      scanf("%d", &(m->memory[c->operand]));
       break;
     case WRITE: 
-      printf("%d\n", m->memory[operand]);
+      printf("%d\n", m->memory[c->operand]);
       break;
     case LOAD: 
-      c->accumulator = m->memory[operand];
+      c->accumulator = m->memory[c->operand];
       break;
     case STORE:
-      m->memory[operand] = c->accumulator;
+      m->memory[c->operand] = c->accumulator;
       break;
     case ADD: 
-      c->accumulator+=m->memory[operand];
+      c->accumulator+=m->memory[c->operand];
       break;
     case SUBTRACT:
-      c->accumulator-=m->memory[operand];
+      c->accumulator-=m->memory[c->operand];
       break;
     case DIVIDE: 
-      c->accumulator/=m->memory[operand];
+      c->accumulator/=m->memory[c->operand];
       break;
     case MULTIPLY:
-      c->accumulator*=m->memory[operand];
+      c->accumulator*=m->memory[c->operand];
       break;
     case BRANCH: 
-      c->instructionCounter = m->memory[operand];
+      c->instructionCounter = m->memory[c->operand];
       break;
     case BRANCHNEG:
-      if (accumulator < 0) {
-        c->instructionCounter = m->memory[operand];
+      if (c->accumulator < 0) {
+        c->instructionCounter = m->memory[c->operand];
       }
       break;
     case BRANCHZERO:
-      if (accumulator == 0) {
-        c->instructionCounter = m->memory[operand];
+      if (c->accumulator == 0) {
+        c->instructionCounter = m->memory[c->operand];
       }
       break;
     case HALT:
