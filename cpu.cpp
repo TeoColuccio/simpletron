@@ -1,70 +1,68 @@
-#include <stdio.h>
+#include <iostream>
 #include "cpu.h"
 
-void cpu_reset(CpuPtr c)
+using namespace std;
+
+void Cpu::cpu_reset()
 {
-  c->accumulator=0;
-  c->instructionCounter=0;
-  c->instructionRegister=0;
-  c->operationCode=0;
-  c->operand=0;
+  accumulator=0;
+  instructionCounter=0;
+  instructionRegister=0;
+  operationCode=0;
+  operand=0;
 }
 
-void cpu_dump(CpuPtr c)
+void Cpu::cpu_dump()
 {
-  printf("accumulator: +%04d\n"
-      "instructionCounter: %02d\n"
-      "instructionRegister: +%04d\n"
-      "operationCode: %02d\n"
-      "operand: %02d\n", c->accumulator, c->instructionCounter, c->instructionRegister, c->operationCode, c->operand);
+  cout <<  accumulator  << instructionCounter << instructionRegister << operationCode << operand << endl <<;
 }  
 
-void fetch(MemoryPtr m, CpuPtr c)
+void Cpu::fetch(Memory &m)
 {
-  c->instructionRegister = &(m->memory[c->instructionCounter]);
-  c->operationCode = c->instructionRegister / 100;
-  c->operand = c->instructionRegister % 100;		
+  instructionRegister = (m.memory[instructionCounter]);
+  operationCode = instructionRegister / 100;
+  operand = instructionRegister % 100;		
 }
 
-void execute(MemoryPtr m, CpuPtr c)
+void Cpu::execute(Memory &m)
 {
-  switch (c->operationCode) {
+  switch (operationCode) {
 
     case READ: 
-      scanf("%d", &(m->memory[c->operand]));
+      cin >> (m.memory[operand]);
       break;
     case WRITE: 
-      printf("%d\n", m->memory[c->operand]);
+      printf("%d\n", m.memory[operand]);
       break;
     case LOAD: 
-      c->accumulator = m->memory[c->operand];
+      accumulator = m.memory[operand];
       break;
     case STORE:
-      m->memory[c->operand] = c->accumulator;
+      m.memory[operand] = accumulator;
       break;
     case ADD: 
-      c->accumulator+=m->memory[c->operand];
+      accumulator+=m.memory[operand];
       break;
     case SUBTRACT:
-      c->accumulator-=m->memory[c->operand];
+      accumulator-=m.memory[operand];
       break;
     case DIVIDE: 
-      c->accumulator/=m->memory[c->operand];
+      accumulator/=m.memory[operand];
       break;
     case MULTIPLY:
-      c->accumulator*=m->memory[c->operand];
+      accumulator*=m.memory[operand];
       break;
     case BRANCH: 
-      c->instructionCounter = m->memory[c->operand];
+      instructionCounter = m.memory[operand];
       break;
     case BRANCHNEG:
-      if (c->accumulator < 0) {
-        c->instructionCounter = m->memory[c->operand];
+      if (accumulator < 0) {
+         instructionCounter = m.memory[operand];
       }
       break;
     case BRANCHZERO:
-      if (c->accumulator == 0) {
-        c->instructionCounter = m->memory[c->operand];
+      if (accumulator == 0) {
+          instructionCounter = m.memory[operand];
       }
       break;
     case HALT:

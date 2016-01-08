@@ -17,16 +17,14 @@
 #define BRANCHZERO 42
 #define HALT 43
 
-struct cpu { 
+class Cpu { 
+  private:
 	int accumulator, instructionCounter, instructionRegister, operationCode, operand;
+  public:
+	void cpu_reset();
+	void cpu_dump();
+	void fetch(Memory &m);
+	void execute(Memory &m);
 };
-
-typedef struct cpu Cpu;
-typedef struct cpu * CpuPtr;
-
-void cpu_reset(CpuPtr c);
-void cpu_dump(CpuPtr c);
-void fetch(MemoryPtr m, CpuPtr c);
-void execute(MemoryPtr m, CpuPtr);
 
 #endif
