@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include "memory.h"
-void set_memory(MemoryPtr m, int index, int num)
+
+void Memory::set_memory(int index, int num)
 {
-  m->memory[index] = num;
+ memory[index] = num;
 }
-void azzera_memory(MemoryPtr m)
+void Memory::azzera_memory()
 {
   int i;
   
   for (i=0; i<MEMORY_SIZE; i++) {
-      m->memory[i] = 0;
+  	memory[i] = 0;
   }
 }
 
-void memory_dump(MemoryPtr m)
+void Memory::memory_dump()
 { 
   int i=0, righe=0, colonne=0;
   
@@ -30,12 +31,10 @@ void memory_dump(MemoryPtr m)
                 printf("%2d\t",righe);
                 righe+=10;
         }
-        printf("+%04d\t", m->memory[i]);
+        printf("+%04d\t", memory[i]);
 
         if ((i+1)%10==0) {
                 putchar('\n');
         }
   }
 }
-
-

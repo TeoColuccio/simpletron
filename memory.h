@@ -3,15 +3,14 @@
 
 #define MEMORY_SIZE 100
 
-struct Memory {
-  int memory[MEMORY_SIZE];
+class Memory {
+  private:
+	int memory[MEMORY_SIZE];
+
+  public:
+  	void set_memory(int index, int num);
+ 	void azzera_memory();
+  	void memory_dump();
 };
-
-typedef struct Memory Memory;
-typedef struct Memory * MemoryPtr;
-
-void set_memory(MemoryPtr m, int index, int num);
-void azzera_memory(MemoryPtr m);
-void memory_dump(MemoryPtr m);
 
 #endif
