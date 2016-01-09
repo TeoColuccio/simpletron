@@ -9,7 +9,7 @@ class Memory {
 
   public:
   	void set_memory(int index, int num);
- 	void azzera_memory();
+   	void azzera_memory();
   	void memory_dump();
 };
 

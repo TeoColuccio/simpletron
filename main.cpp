@@ -1,6 +1,9 @@
-#include <stdio.h>
+#include <iostream>
+
 #include "memory.h"
 #include "cpu.h"
+
+using namespace std; 
 
 char* welcome();
 
@@ -9,33 +12,33 @@ int main (){
 	Memory m;
 	Cpu c;
 	
-	cpu_reset(&c);
-	azzera_memory(&m);
+	c.cpu_reset(&c);
+	m.azzera_memory(&m);
 	
-	set_memory(&m, 0, 1007); /* (Legge A) */
-	set_memory(&m, 1, 1008); /* (Legge B) */
-	set_memory(&m, 2, 2007); /* (Carica A nell'accumulatore) */
-	set_memory(&m, 3, 3008); /* (Somma B all'accumulatore) */
-	set_memory(&m, 4, 2109); /* (Memorizza il valore dell'accumulatore */
-	set_memory(&m, 5, 1109); /* (Stampa C) */
-	set_memory(&m, 6, 4300); /* (Halt) */
-	set_memory(&m, 7, 0);    /* (Variabile A) */ 
-	set_memory(&m, 8, 0);    /* (Variabile B) */
-	set_memory(&m, 9, 0);    /* (Risultato C) */
+	m.set_memory(&m, 0, 1007); /* (Legge A) */
+	m.set_memory(&m, 1, 1008); /* (Legge B) */
+	m.set_memory(&m, 2, 2007); /* (Carica A nell'accumulatore) */
+	m.set_memory(&m, 3, 3008); /* (Somma B all'accumulatore) */
+	m.set_memory(&m, 4, 2109); /* (Memorizza il valore dell'accumulatore */
+	m.set_memory(&m, 5, 1109); /* (Stampa C) */
+	m.set_memory(&m, 6, 4300); /* (Halt) */
+	m.set_memory(&m, 7, 0);    /* (Variabile A) */ 
+	m.set_memory(&m, 8, 0);    /* (Variabile B) */
+	m.set_memory(&m, 9, 0);    /* (Risultato C) */
 	
-	printf("%s",welcome());
+	cout << welcome()<< endl;
      
     	/* il ciclo termina quando arriva l'istruzione di HALT */
  	while (c.operationCode!=HALT && c.instructionCounter<MEMORY_SIZE) {
-    printf("instructionCounter: %d\n", c.instructionCounter);
-		fetch(&m, &c);	
+    cout << "instructionCounter: " << c.instructionCounter << endl;
+		c.fetch(&m, &c);	
 		c.instructionCounter++; /* e' importante che l'incremento avvenga PRIMA dell'execute */
-		execute(&m, &c);
+		c.execute(&m, &c);
 	}
 
 	/* un'unica stampa alla fine */ 
-	cpu_dump(&c);
-	memory_dump(&m);
+	c.cpu_dump(&c);
+	m.memory_dump(&m);
 
 	return 0;
 }
@@ -50,5 +53,3 @@ char* welcome ()
          "*** Type the sentinel -99999 to stop entering ***\n"
          "*** your program. ***\n";
 }
-
-

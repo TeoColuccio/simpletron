@@ -14,7 +14,7 @@ void Cpu::cpu_reset()
 
 void Cpu::cpu_dump()
 {
-  cout <<  accumulator  << instructionCounter << instructionRegister << operationCode << operand << endl <<;
+  cout <<  accumulator  << instructionCounter << instructionRegister << operationCode << operand << endl;
 }  
 
 void Cpu::fetch(Memory &m)
@@ -32,7 +32,7 @@ void Cpu::execute(Memory &m)
       cin >> (m.memory[operand]);
       break;
     case WRITE: 
-      printf("%d\n", m.memory[operand]);
+      cout << m.memory[operand] << endl;
       break;
     case LOAD: 
       accumulator = m.memory[operand];
@@ -66,7 +66,7 @@ void Cpu::execute(Memory &m)
       }
       break;
     case HALT:
-      printf("*** Simpletron execution terminated ***\n");
+      cout << "*** Simpletron execution terminated ***" << endl;
       break; 
   }
 }

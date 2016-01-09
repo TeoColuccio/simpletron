@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include "memory.h"
 
 void Memory::set_memory(int index, int num)
@@ -18,7 +18,7 @@ void Memory::memory_dump()
 { 
   int i=0, righe=0, colonne=0;
   
-  printf("Memory: \n");
+  cout << "Memory: " << endl;
 
   putchar('\t');
   for (colonne=0;colonne<10;colonne++) {
@@ -28,10 +28,10 @@ void Memory::memory_dump()
   
   for (i=0; i<MEMORY_SIZE; i++) {
         if(i%10==0) {
-                printf("%2d\t",righe);
+                cout << righe << endl;
                 righe+=10;
         }
-        printf("+%04d\t", memory[i]);
+        cout << memory[i] << endl;
 
         if ((i+1)%10==0) {
                 putchar('\n');
