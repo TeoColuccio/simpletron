@@ -31,9 +31,9 @@ int main (){
     	/* il ciclo termina quando arriva l'istruzione di HALT */
  	while (c.operationCode!=HALT && c.instructionCounter<MEMORY_SIZE) {
     cout << "instructionCounter: " << c.instructionCounter << endl;
-		c.fetch(&m, &c);	
+		c.fetch(&c);	
 		c.instructionCounter++; /* e' importante che l'incremento avvenga PRIMA dell'execute */
-		c.execute(&m, &c);
+		c.execute(&c);
 	}
 
 	/* un'unica stampa alla fine */ 
