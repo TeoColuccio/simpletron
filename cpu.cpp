@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void Cpu::cpu_reset()
+void Cpu::reset()
 {
   accumulator=0;
   instructionCounter=0;
@@ -12,7 +12,7 @@ void Cpu::cpu_reset()
   operand=0;
 }
 
-void Cpu::cpu_dump()
+void Cpu::dump()
 {
   cout <<  accumulator  << instructionCounter << instructionRegister << operationCode << operand << endl;
 }  

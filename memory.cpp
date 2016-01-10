@@ -1,11 +1,11 @@
 #include <iostream>
 #include "memory.h"
 
-void Memory::set_memory(int index, int num)
+void Memory::set(int index, int num)
 {
  memory[index] = num;
 }
-void Memory::azzera_memory()
+void Memory::azzera()
 {
   int i;
   
@@ -14,7 +14,7 @@ void Memory::azzera_memory()
   }
 }
 
-void Memory::memory_dump()
+void Memory::dump()
 { 
   int i=0, righe=0, colonne=0;
   
