@@ -3,7 +3,6 @@
 
 #include "memory.h"
 
-#define MEMORY_SIZE 100
 #define READ 10
 #define WRITE 11
 #define LOAD 20
