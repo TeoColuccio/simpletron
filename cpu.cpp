@@ -3,6 +3,11 @@
 
 using namespace std;
 
+Cpu::Cpu(Memory* memory)
+{
+	m = memory;
+}
+
 void Cpu::reset()
 {
   accumulator=0;
@@ -15,58 +20,60 @@ void Cpu::reset()
 void Cpu::dump()
 {
   cout << "Accumulator: " <<  accumulator <<endl << 
-       		"InstructionCounter: " << instructionCounter << endl << 
-			"instructionRegister: " <<  instructionRegister<< endl <<
-				"operationCode: " <<  operationCode << endl << 
-					"operand: " <<  operand << endl;
+	"InstructionCounter: " << instructionCounter << endl << 
+	"instructionRegister: " <<  instructionRegister<< endl <<
+	"operationCode: " <<  operationCode << endl << 
+	"operand: " <<  operand << endl;
 }  
 
-void Cpu::fetch(Memory &m)
+void Cpu::fetch()
 {
-  instructionRegister = (m.memory[instructionCounter]);
+  instructionRegister = m->get(instructionCounter);
   operationCode = instructionRegister / 100;
   operand = instructionRegister % 100;		
 }
 
-void Cpu::execute(Memory &m)
+void Cpu::execute()
 {
   switch (operationCode) {
 
     case READ: 
-      cin >> (m.memory[operand]);
+      int value;
+      cin >> value;
+      m->set(operand, value);
       break;
     case WRITE: 
-      cout << m.memory[operand] << endl;
+      cout << m->get(operand) << endl;
       break;
     case LOAD: 
-      accumulator = m.memory[operand];
+      accumulator = m->get(operand);
       break;
     case STORE:
-      m.memory[operand] = accumulator;
+      m->set(operand, accumulator);
       break;
     case ADD: 
-      accumulator+=m.memory[operand];
+      accumulator+=m->get(operand);
       break;
     case SUBTRACT:
-      accumulator-=m.memory[operand];
+      accumulator-=m->get(operand);
       break;
     case DIVIDE: 
-      accumulator/=m.memory[operand];
+      accumulator/=m->get(operand);
       break;
     case MULTIPLY:
-      accumulator*=m.memory[operand];
+      accumulator*=m->get(operand);
       break;
     case BRANCH: 
-      instructionCounter = m.memory[operand];
+      instructionCounter = m->get(operand);
       break;
     case BRANCHNEG:
       if (accumulator < 0) {
-         instructionCounter = m.memory[operand];
+         instructionCounter = m->get(operand);
       }
       break;
     case BRANCHZERO:
       if (accumulator == 0) {
-          instructionCounter = m.memory[operand];
+          instructionCounter = m->get(operand);
       }
       break;
     case HALT:
@@ -74,7 +81,3 @@ void Cpu::execute(Memory &m)
       break; 
   }
 }
-
-
-
-

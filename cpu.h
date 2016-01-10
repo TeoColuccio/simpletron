@@ -18,10 +18,16 @@
 
 class Cpu { 
   private:
-	int accumulator, instructionCounter, instructionRegister, operationCode, operand;
-	*Memory;
+	int accumulator;
+	int instructionCounter;
+	int instructionRegister;
+	int operationCode;
+	int operand;
+	Memory* m;
+
   public:
-	Cpu();
+	Cpu(Memory* memory);
+
 	void reset();
 	void dump();
 	void fetch();

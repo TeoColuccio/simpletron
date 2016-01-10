@@ -9,7 +9,10 @@ class Memory {
 
   public:
   	Memory();
+
 	void set(int index, int num);
+	int get(int index);
+
    	void azzera();
   	void dump();
 };
