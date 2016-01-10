@@ -1,6 +1,12 @@
 #include <iostream>
 #include "memory.h"
 
+using namespace std;
+
+Memory::Memory()
+{
+ memory.azzera();
+}
 void Memory::set(int index, int num)
 {
  memory[index] = num;
@@ -20,11 +26,11 @@ void Memory::dump()
   
   cout << "Memory: " << endl;
 
-  putchar('\t');
+  cout <<'\t';
   for (colonne=0;colonne<10;colonne++) {
-        printf("   %d\t ",colonne);
+        cout << colonne << '\t';
   }
-  putchar('\n');
+  cout <<'\n';
   
   for (i=0; i<MEMORY_SIZE; i++) {
         if(i%10==0) {
@@ -34,7 +40,7 @@ void Memory::dump()
         cout << memory[i] << endl;
 
         if ((i+1)%10==0) {
-                putchar('\n');
+                cout <<'\n';
         }
   }
 }

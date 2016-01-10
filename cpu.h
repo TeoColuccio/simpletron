@@ -20,6 +20,7 @@ class Cpu {
   private:
 	int accumulator, instructionCounter, instructionRegister, operationCode, operand;
   public:
+	Cpu();
 	void reset();
 	void dump();
 	void fetch(Memory &m);

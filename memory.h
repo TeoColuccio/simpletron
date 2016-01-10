@@ -8,7 +8,8 @@ class Memory {
 	int memory[MEMORY_SIZE];
 
   public:
-  	void set(int index, int num);
+  	Memory();
+	void set(int index, int num);
    	void azzera();
   	void dump();
 };
