@@ -14,7 +14,11 @@ void Cpu::reset()
 
 void Cpu::dump()
 {
-  cout << "Accumulator: " <<  accumulator <<endl << "InstructionCounter: " << instructionCounter << endl << "instructionRegister: " <<  instructionRegister<< endl <<"operationCode: " <<  operationCode << endl<< "operand: " <<  operand << endl;
+  cout << "Accumulator: " <<  accumulator <<endl << 
+       		"InstructionCounter: " << instructionCounter << endl << 
+			"instructionRegister: " <<  instructionRegister<< endl <<
+				"operationCode: " <<  operationCode << endl << 
+					"operand: " <<  operand << endl;
 }  
 
 void Cpu::fetch(Memory &m)

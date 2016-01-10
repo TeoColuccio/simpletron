@@ -5,7 +5,7 @@ using namespace std;
 
 Memory::Memory()
 {
- memory.azzera();
+ azzera();
 }
 void Memory::set(int index, int num)
 {
