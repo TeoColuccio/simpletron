@@ -29,6 +29,7 @@ class Cpu {
 	Cpu(Memory* memory);
 
 	void reset();
+	void incrementa_instructionCounter();
 	void dump();
 	void fetch();
 	void execute();

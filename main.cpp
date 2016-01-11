@@ -10,35 +10,35 @@ char* welcome();
 int main (){
 
 	Memory m;
-	Cpu c;
+	Cpu c(&m);
 	
-	c.cpu_reset(&c);
-	m.azzera_memory(&m);
+	c.reset();
+	m.azzera();
 	
-	m.set_memory(&m, 0, 1007); /* (Legge A) */
-	m.set_memory(&m, 1, 1008); /* (Legge B) */
-	m.set_memory(&m, 2, 2007); /* (Carica A nell'accumulatore) */
-	m.set_memory(&m, 3, 3008); /* (Somma B all'accumulatore) */
-	m.set_memory(&m, 4, 2109); /* (Memorizza il valore dell'accumulatore */
-	m.set_memory(&m, 5, 1109); /* (Stampa C) */
-	m.set_memory(&m, 6, 4300); /* (Halt) */
-	m.set_memory(&m, 7, 0);    /* (Variabile A) */ 
-	m.set_memory(&m, 8, 0);    /* (Variabile B) */
-	m.set_memory(&m, 9, 0);    /* (Risultato C) */
+	m.set(0, 1007); /* (Legge A) */
+	m.set(1, 1008); /* (Legge B) */
+	m.set(2, 2007); /* (Carica A nell'accumulatore) */
+	m.set(3, 3008); /* (Somma B all'accumulatore) */
+	m.set(4, 2109); /* (Memorizza il valore dell'accumulatore */
+	m.set(5, 1109); /* (Stampa C) */
+	m.set(6, 4300); /* (Halt) */
+	m.set(7, 0);    /* (Variabile A) */ 
+	m.set(8, 0);    /* (Variabile B) */
+	m.set(9, 0);    /* (Risultato C) */
 	
-	cout << welcome()<< endl;
+	cout << welcome() << endl;
      
     	/* il ciclo termina quando arriva l'istruzione di HALT */
  	while (c.operationCode!=HALT && c.instructionCounter<MEMORY_SIZE) {
-    cout << "instructionCounter: " << c.instructionCounter << endl;
-		c.fetch(&c);	
-		c.instructionCounter++; /* e' importante che l'incremento avvenga PRIMA dell'execute */
-		c.execute(&c);
+ 	        cout << "instructionCounter: " << c.instructionCounter << endl;
+		c.fetch();	
+		c.incrementa_instructionCounter(); /* e' importante che l'incremento avvenga PRIMA dell'execute */
+		c.execute();
 	}
 
 	/* un'unica stampa alla fine */ 
-	c.cpu_dump(&c);
-	m.memory_dump(&m);
+	c.dump();
+	m.dump();
 
 	return 0;
 }

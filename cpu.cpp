@@ -16,7 +16,10 @@ void Cpu::reset()
   operationCode=0;
   operand=0;
 }
-
+void Cpu::incrementa_instructionCounter()
+{
+  instructionCounter++;
+}
 void Cpu::dump()
 {
   cout << "Accumulator: " <<  accumulator <<endl << 
