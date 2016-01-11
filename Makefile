@@ -1,7 +1,7 @@
-CFLAGS=-Wall -ansi
+CXXFLAGS=-Wall -ansi
 
 simpletron: main.o memory.o cpu.o
-	gcc main.o memory.o cpu.o -o simpletron
+	g++ main.o memory.o cpu.o -o simpletron
 
 main.o: main.cpp
 memory.o: memory.cpp
