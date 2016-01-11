@@ -29,6 +29,8 @@ class Cpu {
 	Cpu(Memory* memory);
 
 	void reset();
+	int get_instructionCounter();
+	int get_operationCode();
 	void incrementa_instructionCounter();
 	void dump();
 	void fetch();

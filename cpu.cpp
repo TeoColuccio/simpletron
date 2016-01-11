@@ -16,6 +16,17 @@ void Cpu::reset()
   operationCode=0;
   operand=0;
 }
+
+int Cpu::get_instructionCounter()
+{
+  return instructionCounter;
+}
+
+int Cpu::get_operationCode()
+{
+  return operationCode;
+}
+
 void Cpu::incrementa_instructionCounter()
 {
   instructionCounter++;

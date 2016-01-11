@@ -12,9 +12,6 @@ int main (){
 	Memory m;
 	Cpu c(&m);
 	
-	c.reset();
-	m.azzera();
-	
 	m.set(0, 1007); /* (Legge A) */
 	m.set(1, 1008); /* (Legge B) */
 	m.set(2, 2007); /* (Carica A nell'accumulatore) */
@@ -29,8 +26,8 @@ int main (){
 	cout << welcome() << endl;
      
     	/* il ciclo termina quando arriva l'istruzione di HALT */
- 	while (c.operationCode!=HALT && c.instructionCounter<MEMORY_SIZE) {
- 	        cout << "instructionCounter: " << c.instructionCounter << endl;
+ 	while (c.get_operationCode()!=HALT && c.get_instructionCounter() < MEMORY_SIZE) {
+ 	        cout << "instructionCounter: " << c.get_instructionCounter() << endl;
 		c.fetch();	
 		c.incrementa_instructionCounter(); /* e' importante che l'incremento avvenga PRIMA dell'execute */
 		c.execute();
