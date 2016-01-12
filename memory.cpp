@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "memory.h"
 
 using namespace std;
@@ -41,13 +42,14 @@ void Memory::dump()
 
 	for (i=0; i<MEMORY_SIZE; i++) {
 		if(i%10==0) {
-			cout << righe << endl;
+			cout << setw(2) << righe << '\t';
 			righe+=10;
 		}
-		cout << memory[i] << endl;
+		cout << setw(5) << showpos << setfill('0') << internal << memory[i] << '\t';
 
 		if ((i+1)%10==0) {
 			cout << endl;
 		}
 	}
+  cout << resetiosflags;
 }

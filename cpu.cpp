@@ -1,10 +1,13 @@
 #include <iostream>
+#include <iomanip>
 #include "cpu.h"
 
 using namespace std;
 
 Cpu::Cpu(Memory* memory)
 {
+  reset();
+
 	m = memory;
 }
 
@@ -33,11 +36,12 @@ void Cpu::incrementa_instructionCounter()
 }
 void Cpu::dump()
 {
-  cout << "Accumulator: " <<  accumulator <<endl << 
-	"InstructionCounter: " << instructionCounter << endl << 
-	"instructionRegister: " <<  instructionRegister<< endl <<
-	"operationCode: " <<  operationCode << endl << 
-	"operand: " <<  operand << endl;
+  cout << "Accumulator:\t\t" << showpos << setw(5) << setfill('0') << internal << accumulator <<endl << 
+	"InstructionCounter:\t" << noshowpos << setw(2) << setfill('0') << instructionCounter << endl << 
+	"instructionRegister:\t" << showpos << setw(5) << setfill('0') << internal <<  instructionRegister<< endl <<
+	"operationCode:\t\t" << noshowpos << setw(2) << setfill('0') << operationCode << endl << 
+	"operand:\t\t" << noshowpos << setw(2) << setfill('0') <<  operand << endl;
+  cout << resetiosflags;
 }  
 
 void Cpu::fetch()

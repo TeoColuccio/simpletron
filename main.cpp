@@ -5,7 +5,7 @@
 
 using namespace std; 
 
-char* welcome();
+const char* welcome();
 
 int main (){
 
@@ -35,12 +35,13 @@ int main (){
 
 	/* un'unica stampa alla fine */ 
 	c.dump();
+  cout << endl;
 	m.dump();
 
 	return 0;
 }
 
-char* welcome ()
+const char* welcome ()
 {
   return "*** Welcome to Simpletron! ***\n"
          "*** Please enter your program one istruction ***\n"
