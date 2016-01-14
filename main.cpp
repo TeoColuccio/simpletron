@@ -9,9 +9,8 @@ const char* welcome();
 
 int main (){
 
-	Memory m;
-	Cpu c(&m);
-	
+  Simpletron s;
+
 	m.set(0, 1007); /* (Legge A) */
 	m.set(1, 1008); /* (Legge B) */
 	m.set(2, 2007); /* (Carica A nell'accumulatore) */
