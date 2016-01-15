@@ -9,9 +9,9 @@ class Simpletron {
     Cpu* c;
     Memory* m;
   public:
-    simpletron();
-    run();
-    ~simpletron();
-}
+    Simpletron();
+    ~Simpletron();
+    void run();
+};
 
 #endif
